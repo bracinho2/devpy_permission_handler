@@ -18,12 +18,12 @@ class PermissionHandlerWeb extends StatefulWidget {
 class _PermissionHandlerWebState extends State<PermissionHandlerWeb> {
   final _permissionHandler = const PermissionHandlerService();
 
-  String permissionName = '';
+  String? permissionName;
   AppPermissionStatus status = AppPermissionStatus.denied;
+  AppPermissions permission = AppPermissions.location;
 
   void getPermission(BuildContext context) async {
-    final perm =
-        await _permissionHandler.checkPermission(AppPermissions.location);
+    final perm = await _permissionHandler.checkPermission(permission);
 
     if (status == AppPermissionStatus.granted) {
       permissionIsGranted(AppPermissions.location);
@@ -60,21 +60,93 @@ class _PermissionHandlerWebState extends State<PermissionHandlerWeb> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: getBackgroudColor(status),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text('Is Web: ${Platform.isWeb}'),
-            Text(permissionName),
-          ],
+    return switch (status) {
+      AppPermissionStatus.permanentlyDenied => Scaffold(
+          backgroundColor: Colors.red,
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: 100,
+                  width: 100,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+                Text('${Platform.os}'),
+                Text('$permission is $permissionName'),
+              ],
+            ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            child: const Icon(Icons.location_on),
+            onPressed: () => getPermission(context),
+          ),
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.location_on),
-        onPressed: () => getPermission(context),
-      ),
-    );
+      AppPermissionStatus.denied => Scaffold(
+          backgroundColor: Colors.red,
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  height: 100,
+                  width: 100,
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                  ),
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+                Text('${Platform.os}'),
+                Text('$permission is $permissionName'),
+              ],
+            ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            child: const Icon(Icons.location_on),
+            onPressed: () => getPermission(context),
+          ),
+        ),
+      AppPermissionStatus.granted => Scaffold(
+          backgroundColor: getBackgroudColor(status),
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('${Platform.os}'),
+                Text('$permission is $permissionName'),
+              ],
+            ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            child: const Icon(Icons.location_on),
+            onPressed: () => getPermission(context),
+          ),
+        ),
+      _ => Scaffold(
+          backgroundColor: getBackgroudColor(status),
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('${Platform.os}'),
+                Text('$permission is $permissionName'),
+              ],
+            ),
+          ),
+          floatingActionButton: FloatingActionButton(
+            child: const Icon(Icons.location_on),
+            onPressed: () => getPermission(context),
+          ),
+        ),
+    };
   }
 }
