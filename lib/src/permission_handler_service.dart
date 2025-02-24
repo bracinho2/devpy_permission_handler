@@ -3,13 +3,13 @@ import 'package:permission_handler/permission_handler.dart';
 import 'enums.dart';
 import 'platform_checker.dart';
 
-class PermissionHandlerService {
-  const PermissionHandlerService();
+class DevPyPermissionHandler {
+  const DevPyPermissionHandler();
 
   Future<AppPermissionStatus> checkPermission(
     AppPermissions permission,
   ) async {
-    if (Platform.isWeb) {
+    if (PlatformChecker.isWeb) {
       switch (permission) {
         case AppPermissions.location:
           return _getStatus(status: await Permission.location.request());

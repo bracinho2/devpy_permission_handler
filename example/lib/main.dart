@@ -16,7 +16,7 @@ class PermissionHandlerWeb extends StatefulWidget {
 }
 
 class _PermissionHandlerWebState extends State<PermissionHandlerWeb> {
-  final _permissionHandler = const PermissionHandlerService();
+  final _permissionHandler = const DevPyPermissionHandler();
 
   String? permissionName;
   AppPermissionStatus status = AppPermissionStatus.denied;
@@ -78,7 +78,7 @@ class _PermissionHandlerWebState extends State<PermissionHandlerWeb> {
                 const SizedBox(
                   height: 40,
                 ),
-                Text('${Platform.os}'),
+                Text('${PlatformChecker.os}'),
                 Text('$permission is $permissionName'),
               ],
             ),
@@ -105,7 +105,7 @@ class _PermissionHandlerWebState extends State<PermissionHandlerWeb> {
                 const SizedBox(
                   height: 40,
                 ),
-                Text('${Platform.os}'),
+                Text('${PlatformChecker.os}'),
                 Text('$permission is $permissionName'),
               ],
             ),
@@ -121,7 +121,7 @@ class _PermissionHandlerWebState extends State<PermissionHandlerWeb> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('${Platform.os}'),
+                Text('${PlatformChecker.os}'),
                 Text('$permission is $permissionName'),
               ],
             ),
@@ -137,7 +137,7 @@ class _PermissionHandlerWebState extends State<PermissionHandlerWeb> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('${Platform.os}'),
+                Text('${PlatformChecker.os}'),
                 Text('$permission is $permissionName'),
               ],
             ),

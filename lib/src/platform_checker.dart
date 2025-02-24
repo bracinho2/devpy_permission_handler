@@ -2,8 +2,8 @@ import 'package:flutter/foundation.dart';
 
 import 'enums.dart';
 
-class Platform {
-  const Platform();
+class PlatformChecker {
+  const PlatformChecker();
 
   /// Platform is Web.
   static bool get isWeb => os == Os.web;
