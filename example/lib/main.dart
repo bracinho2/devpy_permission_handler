@@ -23,7 +23,7 @@ class _PermissionHandlerWebState extends State<PermissionHandlerWeb> {
   AppPermissions permission = AppPermissions.location;
 
   void getPermission(BuildContext context) async {
-    final perm = await _permissionHandler.checkPermission(permission);
+    final perm = await _permissionHandler.getPermission(permission);
 
     if (status == AppPermissionStatus.granted) {
       permissionIsGranted(AppPermissions.location);

@@ -6,7 +6,7 @@ import 'platform_checker.dart';
 class DevPyPermissionHandler {
   const DevPyPermissionHandler();
 
-  Future<AppPermissionStatus> checkPermission(
+  Future<AppPermissionStatus> getPermission(
     AppPermissions permission,
   ) async {
     if (PlatformChecker.isWeb) {
