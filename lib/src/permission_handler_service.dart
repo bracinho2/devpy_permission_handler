@@ -9,9 +9,9 @@ class DevPyPermissionHandler {
   Future<AppPermissionStatus> hasPermission(AppPermissions permission) async {
     switch (permission) {
       case AppPermissions.location:
-        return _getStatus(status: await Permission.location.request());
+        return _getStatus(status: await Permission.location.status);
       case AppPermissions.camera:
-        return _getStatus(status: await Permission.camera.request());
+        return _getStatus(status: await Permission.camera.status);
     }
   }
 
