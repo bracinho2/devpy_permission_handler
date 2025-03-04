@@ -6,6 +6,15 @@ import 'platform_checker.dart';
 class DevPyPermissionHandler {
   const DevPyPermissionHandler();
 
+  Future<AppPermissionStatus> hasPermission(AppPermissions permission) async {
+    switch (permission) {
+      case AppPermissions.location:
+        return _getStatus(status: await Permission.location.request());
+      case AppPermissions.camera:
+        return _getStatus(status: await Permission.camera.request());
+    }
+  }
+
   Future<AppPermissionStatus> getPermission(
     AppPermissions permission,
   ) async {
